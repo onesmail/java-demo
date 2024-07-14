@@ -31,7 +31,7 @@ CREATE TABLE `user`
     `deleted`     int                                                           NULL DEFAULT 0 COMMENT '逻辑删除：0：未删除 1：已删除',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 47
+  AUTO_INCREMENT = 1
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci
   ROW_FORMAT = DYNAMIC;
