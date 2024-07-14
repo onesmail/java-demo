@@ -184,7 +184,11 @@ public class UserController {
         setResponse(response, StrUtil.format("用户信息{}", DateUtil.format(new Date(), "yyyyMMddHHmmss")));
 
         List<User> list = userService.getAllUser();
-        EasyExcel.write(response.getOutputStream()).head(User.class).excelType(ExcelTypeEnum.XLSX).sheet("下载用户信息").doWrite(list);
+        EasyExcel.write(response.getOutputStream())
+                .head(User.class)
+                .excelType(ExcelTypeEnum.XLSX)
+                .sheet("下载用户信息")
+                .doWrite(list);
     }
 
     /**
