@@ -21,6 +21,8 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         setFieldValByName("createTime", new Date(), metaObject);
         // 为"updateTime"字段设置当前时间
         setFieldValByName("updateTime", new Date(), metaObject);
+        // 为"deleted"字段设置默认未删除
+        setFieldValByName("deleted", 0, metaObject);
     }
 
     /**

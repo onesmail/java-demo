@@ -2,6 +2,8 @@ package com.example.demo.service.impl;
 
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.lang.TypeReference;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.entity.User;
 import com.example.demo.entity.dto.AddUserDto;
@@ -9,10 +11,13 @@ import com.example.demo.entity.dto.PageResult;
 import com.example.demo.entity.dto.UpdateUserDto;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.service.UserService;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -71,11 +76,25 @@ public class UserServiceImpl implements UserService {
      * @return 返回包含用户信息的分页结果对象。
      */
     @Override
-    public PageResult<User> getUser(Integer pageNum, Integer pageSize) {
+    public PageResult<User> getUserPage(Integer pageNum, Integer pageSize) {
+
         Page<User> userPage = new Page<>(pageNum, pageSize);
         userMapper.selectPage(userPage, null);
 
         return new PageResult<>(userPage.getRecords(), userPage.getTotal());
+    }
+
+    /**
+     * 分页获取用户信息（逻辑分页）。
+     *
+     * @param pageNum  当前页码，用于指定要获取的数据页。
+     * @param pageSize 每页包含的用户数量，用于控制分页大小。
+     * @return 返回包含用户信息的分页结果对象。
+     */
+    @Override
+    public PageResult<User> queryUserPage(Integer pageNum, Integer pageSize) {
+        List<User> list = userMapper.queryUserPage(new RowBounds((pageNum - 1) * pageSize, pageSize));
+        return new PageResult(list, userMapper.selectCount(null));
     }
 
     /**
@@ -96,5 +115,47 @@ public class UserServiceImpl implements UserService {
      */
     public List<User> getUserByName(String username) {
         return userMapper.getUserByName(username);
+    }
+
+    /**
+     * 根据用户姓名和年龄查询用户列表。
+     *
+     * @param username 用户的姓名，用于精确匹配用户。
+     * @param age      用户的年龄，可选参数。如果指定了年龄，则只返回符合该年龄条件的用户。
+     * @return 匹配条件的用户列表。如果找不到匹配的用户，返回空列表。
+     */
+    @Override
+    public List<User> getUserByNameAndAge(String username, Integer age) {
+
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+
+        if (!username.isEmpty()) {
+            queryWrapper.like("username", username);
+        }
+
+        if (age != null) {
+            queryWrapper.eq("age", age);
+        }
+
+        return userMapper.getUserByNameAndAge(queryWrapper);
+    }
+
+    /**
+     * 批量添加用户信息。
+     *
+     * @param entityList 要保存的用户信息列表。
+     * @return 如果所有用户信息都保存成功，则返回true；否则返回false。
+     */
+    @Override
+    @Transactional
+    public boolean addUserBatch(Collection<AddUserDto> entityList) {
+        List<User> list = Convert.convert(new TypeReference<List<User>>() {
+        }, entityList);
+
+        if (entityList.isEmpty()) {
+            return false;
+        }
+
+        return userMapper.saveUserBatch(list);
     }
 }

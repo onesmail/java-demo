@@ -5,8 +5,12 @@ import com.example.demo.entity.dto.AddUserDto;
 import com.example.demo.entity.dto.PageResult;
 import com.example.demo.entity.dto.UpdateUserDto;
 
+import java.util.Collection;
 import java.util.List;
 
+/**
+ * 用户服务接口
+ */
 public interface UserService {
 
     /**
@@ -40,7 +44,16 @@ public interface UserService {
      * @param pageSize 每页包含的用户数量，用于控制分页大小。
      * @return 返回包含用户信息的分页结果对象。
      */
-    PageResult getUser(Integer pageNum, Integer pageSize);
+    PageResult<User> getUserPage(Integer pageNum, Integer pageSize);
+
+    /**
+     * 分页获取用户信息（逻辑分页）。
+     *
+     * @param pageNum  当前页码，用于指定要获取的数据页。
+     * @param pageSize 每页包含的用户数量，用于控制分页大小。
+     * @return 返回包含用户信息的分页结果对象。
+     */
+    PageResult<User> queryUserPage(Integer pageNum, Integer pageSize);
 
     /**
      * 获取所有用户信息的方法
@@ -56,4 +69,21 @@ public interface UserService {
      * @return 返回匹配用户名的用户列表。如果找不到匹配用户，返回空列表。
      */
     List<User> getUserByName(String name);
+
+    /**
+     * 根据用户姓名和年龄查询用户列表。
+     *
+     * @param name 用户的姓名，用于精确匹配用户。
+     * @param age  用户的年龄，可选参数。如果指定了年龄，则只返回符合该年龄条件的用户。
+     * @return 匹配条件的用户列表。如果找不到匹配的用户，返回空列表。
+     */
+    List<User> getUserByNameAndAge(String name, Integer age);
+
+    /**
+     * 批量添加用户信息。
+     *
+     * @param entityList 要保存的用户信息列表。
+     * @return 如果所有用户信息都保存成功，则返回true；否则返回false。
+     */
+    boolean addUserBatch(Collection<AddUserDto> entityList);
 }

@@ -1,6 +1,5 @@
 package com.example.demo.config;
 
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +11,9 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+/**
+ * 配置 Swagger 的基本信息，如 API 的版本、标题、描述
+ */
 @EnableOpenApi
 @Configuration
 public class SwaggerConfig {

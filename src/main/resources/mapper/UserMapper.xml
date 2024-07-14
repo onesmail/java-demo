@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.demo.mapper.UserMapper">
+    <!-- 批量插入用户信息 -->
+    <insert id="saveUserBatch">
+        insert into user (age, create_time, deleted, id, update_time, username)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.age}, #{item.createTime}, #{item.deleted}, #{item.id}, #{item.updateTime}, #{item.username})
+        </foreach>
+    </insert>
+
     <!-- 查找用户信息 -->
     <select id="getUserByName" resultType="com.example.demo.entity.User" parameterType="string">
         select * from user
@@ -13,4 +22,18 @@
         </trim>
     </select>
 
+    <!-- 根据多个条件查询用户信息 -->
+    <select id="getUserByNameAndAge" resultType="com.example.demo.entity.User">
+        select * from user
+        <if test="ew.emptyOfWhere == false">
+            ${ew.customSqlSegment}
+        </if>
+    </select>
+
+    <!-- 根据页码和每页大小获取用户信息的分页结果（逻辑分页）。-->
+    <select id="queryUserPage" resultType="com.example.demo.entity.User">
+        select *
+        from user
+        where deleted = 0
+    </select>
 </mapper>
