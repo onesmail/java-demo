@@ -17,7 +17,7 @@ public class AddUserDto {
     @ExcelProperty("姓名")
     @ColumnWidth(20)
     @ApiModelProperty(value = "姓名", required = true, example = "tom")
-    private String username;
+    private String userName;
 
     @ExcelProperty("年龄")
     @ColumnWidth(20)
