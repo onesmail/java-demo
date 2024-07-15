@@ -5,6 +5,7 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.format.DateTimeFormat;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.baomidou.mybatisplus.annotation.*;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class User {
 
     @TableId // 指定为主键，我们配置的是auto，即主键自增策略
     @ExcelIgnore
+    @ApiModelProperty(value = "编号")
     private Long id;
 
     /**
@@ -31,6 +33,7 @@ public class User {
      */
     @ExcelProperty("姓名")
     @ColumnWidth(20)
+    @ApiModelProperty(value = "姓名")
     private String username;
 
     /**
@@ -38,6 +41,7 @@ public class User {
      */
     @ExcelProperty("年龄")
     @ColumnWidth(20)
+    @ApiModelProperty(value = "年龄")
     private Integer age;
 
     /**
@@ -47,6 +51,7 @@ public class User {
     @ExcelProperty("创建时间")
     @ColumnWidth(20)
     @DateTimeFormat("yyyy-MM-dd")
+    @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
@@ -56,6 +61,7 @@ public class User {
      */
     @ExcelIgnore
     @TableField(fill = FieldFill.INSERT_UPDATE)
+    @ApiModelProperty(value = "更新时间")
     private Date updateTime;
 
     /**
@@ -63,5 +69,6 @@ public class User {
      */
     @ExcelIgnore
     @TableLogic
+    @ApiModelProperty(value = "逻辑删除")
     private Integer deleted;
 }
