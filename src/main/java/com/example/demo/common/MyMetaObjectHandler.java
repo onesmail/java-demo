@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-/*
- * @Description: 配置 Mybatis Plus 自动填充来实现对create_time、update_time的值自动插入和更新
+/**
+ * 配置 Mybatis Plus 自动填充来实现对create_time、update_time的值自动插入和更新
  */
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {
