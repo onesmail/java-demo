@@ -5,6 +5,7 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.format.DateTimeFormat;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.baomidou.mybatisplus.annotation.*;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,7 @@ import java.util.Date;
 @NoArgsConstructor // 自动为该类生成一个包含所有字段的构造器
 @Accessors(chain = true) // 通过链式调用设置属性的值
 @TableName("user") // 指定实体类对应的表名
+@ApiModel("用户信息")
 public class User {
 
     @TableId // 指定为主键，我们配置的是auto，即主键自增策略
