@@ -48,31 +48,31 @@ public class UserController {
     }
 
     /**
-     * 添加用户信息。
+     * 添加用户信息
      *
      * @param addUserDto 包含新用户信息的数据传输对象。
      * @return 返回添加用户操作的结果，添加成功后的数据库主键id
      */
-    @ApiOperation("添加用户")
+    @ApiOperation("添加用户信息")
     @PostMapping("/adduser")
     public Long addUser(@RequestBody AddUserDto addUserDto) {
         return userService.addUser(addUserDto);
     }
 
     /**
-     * 更新用户信息。
+     * 更新用户信息
      *
      * @param updateUserDto 包含待更新用户信息的数据传输对象。
      * @return boolean 如果删除成功，则返回true；否则返回false。
      */
-    @ApiOperation("更新用户")
+    @ApiOperation("更新用户信息")
     @PutMapping("/updateuser")
     public boolean updateUser(@RequestBody UpdateUserDto updateUserDto) {
         return userService.updateUser(updateUserDto);
     }
 
     /**
-     * 根据用户ID删除用户。
+     * 根据用户ID删除用户
      *
      * @param id 用户的唯一标识符。
      * @return 如果删除成功，则返回true；否则返回false。
@@ -95,7 +95,7 @@ public class UserController {
     }
 
     /**
-     * 分页获取用户信息。
+     * 分页获取用户信息
      *
      * @param pageNum  当前页面的编号，用于指定要获取的数据页。默认值为1。
      * @param pageSize 每页显示的用户数量，用于控制每页的数据显示量。默认值为10。
@@ -108,7 +108,7 @@ public class UserController {
     }
 
     /**
-     * 根据页码和每页大小获取用户信息的分页结果（逻辑分页）。
+     * 根据页码和每页大小获取用户信息的分页结果（逻辑分页）
      *
      * @param pageNum  当前页码，用于指定要获取的数据页。
      * @param pageSize 每页包含的用户数量，用于控制分页大小。
@@ -121,7 +121,7 @@ public class UserController {
     }
 
     /**
-     * 根据用户姓名获取用户信息。
+     * 根据用户姓名获取用户信息
      *
      * @param username 用户姓名。
      * @return 用户信息。
@@ -133,7 +133,7 @@ public class UserController {
     }
 
     /**
-     * 根据用户姓名和年龄查询用户列表。
+     * 根据用户姓名和年龄查询用户列表
      *
      * @param username 用户的姓名，用于精确匹配用户。
      * @param age      用户的年龄，可选参数。如果指定了年龄，则只返回符合该年龄条件的用户。
@@ -146,19 +146,19 @@ public class UserController {
     }
 
     /**
-     * 批量添加用户信息。
+     * 批量添加用户信息
      *
      * @param entityList 要保存的用户信息列表。
      * @return 如果所有用户信息都保存成功，则返回true；否则返回false。
      */
-    @ApiOperation("批量新增用户信息")
+    @ApiOperation("批量添加用户信息")
     @PostMapping("/adduserbatch")
     public boolean addUserBatch(@RequestBody Collection<AddUserDto> entityList) {
         return userService.addUserBatch(entityList);
     }
 
     /**
-     * 通过上传Excel文件导入用户信息。
+     * 通过上传Excel文件导入用户信息
      *
      * @param file 上传的Excel文件，其中包含待添加的用户信息。
      * @return 如果用户信息添加成功，则返回true；否则返回false。
@@ -173,7 +173,7 @@ public class UserController {
     }
 
     /**
-     * 导出用户信息到Excel。
+     * 导出用户信息到Excel
      *
      * @throws IOException 如果读取文件流发生错误，则抛出此异常。
      */
@@ -192,7 +192,7 @@ public class UserController {
     }
 
     /**
-     * 下载Excel模板文件。
+     * 下载Excel模板文件
      *
      * @param response HttpServletResponse对象，用于设置响应头和输出流。
      * @throws Exception 如果发生IO错误，则抛出此异常。
