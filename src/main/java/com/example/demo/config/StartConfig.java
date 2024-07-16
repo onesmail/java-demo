@@ -23,15 +23,15 @@ public class StartConfig implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        Log.info("loginUrl:{}", loginUrl);
-        Log.info("googleexcute:{}", googleexcute);
-        Log.info("isOpen:{}", isOpen);
+        Log.info("Swagger地址:{}", loginUrl);
+        //Log.info("googleexcute:{}", googleexcute);
+        //Log.info("isOpen:{}", isOpen);
 
         //先判断当前环境
-        if (!IsLinuxOs()) {
-            //启动swagger-ui
-            application();
-        }
+        //if (!IsLinuxOs()) {
+        //    //启动swagger-ui
+        //    application();
+        //}
     }
 
     private boolean IsLinuxOs() {
